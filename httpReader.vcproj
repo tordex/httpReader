@@ -65,7 +65,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="libeay32MT.lib ssleay32MT.lib Ws2_32.lib Wldap32.lib Wininet.lib"
-				OutputFile="..\..\lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
+				OutputFile="$(SolutionDir)lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
 				AdditionalLibraryDirectories="openssl\lib\32"
 			/>
 			<Tool
@@ -131,7 +131,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="libeay32MTd.lib ssleay32MTd.lib Ws2_32.lib Wldap32.lib Wininet.lib"
-				OutputFile="..\..\lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
+				OutputFile="$(SolutionDir)lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
 				AdditionalLibraryDirectories="openssl\lib\64"
 			/>
 			<Tool
@@ -197,7 +197,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="libeay32MT.lib ssleay32MT.lib Ws2_32.lib Wldap32.lib Wininet.lib"
-				OutputFile="..\..\lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
+				OutputFile="$(SolutionDir)lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
 				AdditionalLibraryDirectories="openssl\lib\32"
 			/>
 			<Tool
@@ -264,7 +264,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="libeay32MT.lib ssleay32MT.lib Ws2_32.lib Wldap32.lib Wininet.lib"
-				OutputFile="..\..\lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
+				OutputFile="$(SolutionDir)lib\$(ConfigurationName)\$(PlatformName)\$(ProjectName).lib"
 				AdditionalLibraryDirectories="openssl\lib\64"
 			/>
 			<Tool

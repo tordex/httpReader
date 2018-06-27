@@ -1,4 +1,4 @@
-#include "curl/curl.h"
+#include <curl/curl.h>
 #include "HttpReader.h"
 #include <Wininet.h>
 #include <process.h>
@@ -207,6 +207,16 @@ void CHttpReader::SetUserAgent( LPCWSTR userAgent )
 	}
 }
 
+void CHttpReader::SetHeaders(const headers_vector& headers)
+{
+	m_headers = headers;
+}
+
+void CHttpReader::SetPostData(const form_data& post_data)
+{
+	m_form_data = post_data;
+}
+
 void CHttpReader::SetIEProxy()
 {
 /*
@@ -335,6 +345,31 @@ void CHttpReader::Dump()
 		curl_easy_setopt(curl, CURLOPT_USERAGENT,	"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.47 Safari/534.13");
 	}
 
+	curl_slist* slist = NULL;
+	if (!m_headers.empty())
+	{
+		for (auto& item : m_headers)
+		{
+			slist = curl_slist_append(slist, item.c_str());
+		}
+		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, slist);
+	}
+
+	std::string post_str;
+	if (!m_form_data.empty())
+	{
+		//curl_easy_setopt(curl, CURLOPT_POST, 1);
+
+		for (const auto& field : m_form_data)
+		{
+			if (!post_str.empty()) post_str += "&";
+			post_str += field.first;
+			post_str += "=";
+			post_str += field.second;
+		}
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_str.c_str());
+	}
+
 	m_session = curl;
 	CURLcode res = curl_easy_perform(curl);
 
@@ -344,6 +379,13 @@ void CHttpReader::Dump()
 
 	m_session = NULL;
 	curl_easy_cleanup(curl);
+
+	if (slist)
+	{
+		curl_slist_free_all(slist);
+	}
+	m_form_data.clear();
+	m_headers.clear();
 
 	if(res)
 	{
